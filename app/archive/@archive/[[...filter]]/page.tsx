@@ -13,7 +13,6 @@ export default async function FilteredNewsPage({
   params: Promise<{ filter: string }>;
 }) {
   const { filter } = await params;
-  console.log('filter', filter);
   const selectedYear = filter?.[0];
   const selectedMonth = filter?.[1];
 
@@ -32,6 +31,16 @@ export default async function FilteredNewsPage({
 
   if (news && news.length > 0) {
     newContent = <NewsList news={news} />;
+  }
+
+  if (
+    (selectedYear && !getAvailableNewsYears().includes(Number(selectedYear))) ||
+    (selectedMonth &&
+      !getAvailableNewsMonths(Number(selectedYear)).includes(
+        Number(selectedMonth),
+      ))
+  ) {
+    throw new Error(`Invalid filter`);
   }
 
   return (

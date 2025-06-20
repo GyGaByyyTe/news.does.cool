@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PathLink from '@/components/PathLink';
 
 export default function MainHeader() {
   return (
@@ -9,7 +10,10 @@ export default function MainHeader() {
       <nav>
         <ul>
           <li>
-            <Link href="/news">News</Link>
+            <PathLink href="/news">News</PathLink>
+          </li>
+          <li>
+            <PathLink href="/archive">Archive</PathLink>
           </li>
         </ul>
       </nav>

@@ -1,8 +1,14 @@
+import sql from 'better-sqlite3';
+
 import { NEWS_DB } from '@/news-db';
+
+const db = sql('data.db');
 import { NewsItem } from '@/types/news';
 
-export function getAllNews(): NewsItem[] {
-  return NEWS_DB;
+export async function getAllNews(): Promise<NewsItem[]> {
+  const news = db.prepare('SELECT * FROM news').all() as NewsItem[];
+  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay
+  return news;
 }
 
 export function getLatestNews(): NewsItem[] {

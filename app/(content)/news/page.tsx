@@ -1,11 +1,13 @@
-import { NEWS_DB } from '@/news-db';
 import NewsList from '@/components/NewsList';
+import { getAllNews } from '@/lib/newsHelpers';
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  const news = await getAllNews();
+
   return (
     <>
       <h1>NEWS LIST page</h1>
-      <NewsList news={NEWS_DB} />
+      <NewsList news={news} />
     </>
   );
 }

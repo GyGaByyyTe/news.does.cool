@@ -43,11 +43,11 @@ news.does.cool/
 │   ├── globals.css       # Global styles
 │   ├── icon.jpg          # Application icon
 │   ├── layout.tsx        # Root layout with metadata
-│   ├── page.tsx          # Home page component
+│   ├── default.tsx          # Home page component
 │   └── news/             # News section
-│       ├── page.tsx      # News listing page
+│       ├── default.tsx      # News listing page
 │       └── [id]/         # Dynamic route for news articles
-│           └── page.tsx  # Individual news article page
+│           └── default.tsx  # Individual news article page
 ├── assets/               # Static assets (images, icons)
 ├── public/               # Public static files
 ├── .env.local            # Environment variables

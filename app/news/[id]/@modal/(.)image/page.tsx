@@ -1,8 +1,7 @@
 import { NEWS_DB } from '@/news-db';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 
-export default async function NewsDetailsPage({
+export default async function InterceptedImagePage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -15,15 +14,13 @@ export default async function NewsDetailsPage({
   }
 
   return (
-    <article className="news-article">
-      <header>
-        <Link href={`/news/${newsItem.slug}/image`}>
+    <>
+      <div className="modal-backdrop" />
+      <dialog open className="modal">
+        <div className="fullscreen-image">
           <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} />
-        </Link>
-        <h1>{newsItem.title}</h1>
-        <time dateTime={newsItem.date}>{newsItem.date}</time>
-      </header>
-      <p>{newsItem.content}</p>
-    </article>
+        </div>
+      </dialog>
+    </>
   );
 }

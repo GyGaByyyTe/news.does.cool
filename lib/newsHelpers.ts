@@ -7,7 +7,7 @@ import { NewsItem } from '@/types/news';
 
 export async function getAllNews(): Promise<NewsItem[]> {
   const news = db.prepare('SELECT * FROM news').all() as NewsItem[];
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay
+  // await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay
   return news;
 }
 

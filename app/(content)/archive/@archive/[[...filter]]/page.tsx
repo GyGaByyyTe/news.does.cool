@@ -17,14 +17,20 @@ export default async function FilteredNewsPage({
   const selectedMonth = filter?.[1];
 
   let news = undefined;
-  let links = getAvailableNewsYears();
+  const availableYears = await getAvailableNewsYears();
+  let availableMonths: string[] = [];
+  let links: string[] = availableYears;
 
-  if (selectedMonth && selectedYear) {
-    news = getNewsForYearAndMonth(Number(selectedYear), Number(selectedMonth));
-    links = [];
-  } else if (selectedYear) {
-    news = getNewsForYear(Number(selectedYear));
-    links = getAvailableNewsMonths(Number(selectedYear));
+  if (selectedYear) {
+    availableMonths = await getAvailableNewsMonths(selectedYear);
+
+    if (selectedMonth) {
+      links = [];
+      news = await getNewsForYearAndMonth(selectedYear, selectedMonth);
+    } else {
+      news = await getNewsForYear(selectedYear);
+      links = availableMonths;
+    }
   }
 
   let newContent = <p>No news are defined for this period</p>;
@@ -34,11 +40,8 @@ export default async function FilteredNewsPage({
   }
 
   if (
-    (selectedYear && !getAvailableNewsYears().includes(Number(selectedYear))) ||
-    (selectedMonth &&
-      !getAvailableNewsMonths(Number(selectedYear)).includes(
-        Number(selectedMonth),
-      ))
+    (selectedYear && !availableYears.includes(selectedYear)) ||
+    (selectedMonth && !availableMonths.includes(selectedMonth))
   ) {
     throw new Error(`Invalid filter`);
   }

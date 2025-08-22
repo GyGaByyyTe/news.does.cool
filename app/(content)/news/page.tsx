@@ -6,7 +6,7 @@ export default async function NewsPage() {
 
   return (
     <>
-      <h1>NEWS LIST page</h1>
+      <h1>News Page</h1>
       <NewsList news={news} />
     </>
   );

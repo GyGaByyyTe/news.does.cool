@@ -1,6 +1,6 @@
-import { NEWS_DB } from '@/news-db';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { getNewsItem } from '@/lib/newsHelpers';
 
 export default async function NewsDetailsPage({
   params,
@@ -8,7 +8,7 @@ export default async function NewsDetailsPage({
   params: Promise<{ id: string }>;
 }) {
   const { id: newsSlug } = await params;
-  const newsItem = NEWS_DB.find((item) => item.slug === newsSlug);
+  const newsItem = await getNewsItem(newsSlug);
 
   if (!newsItem) {
     notFound();

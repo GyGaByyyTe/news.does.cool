@@ -1,5 +1,5 @@
-import { NEWS_DB } from '@/news-db';
 import { notFound } from 'next/navigation';
+import { getNewsItem } from '@/lib/newsHelpers';
 
 export default async function ImagePage({
   params,
@@ -7,7 +7,7 @@ export default async function ImagePage({
   params: Promise<{ id: string }>;
 }) {
   const { id: newsSlug } = await params;
-  const newsItem = NEWS_DB.find((item) => item.slug === newsSlug);
+  const newsItem = await getNewsItem(newsSlug);
 
   if (!newsItem) {
     notFound();

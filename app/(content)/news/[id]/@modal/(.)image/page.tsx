@@ -1,12 +1,15 @@
-'use client';
 import React from 'react';
-import { NEWS_DB } from '@/news-db';
-import { notFound, useRouter, useParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
+import { getNewsItem } from '@/lib/newsHelpers';
+import ModalBackdrop from '@/components/ModalBackdrop';
 
-export default function InterceptedImagePage() {
-  const { id: newsSlug } = useParams();
-  const router = useRouter();
-  const newsItem = NEWS_DB.find((item) => item.slug === newsSlug);
+export default async function InterceptedImagePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id: newsSlug } = await params;
+  const newsItem = await getNewsItem(newsSlug);
 
   if (!newsItem) {
     notFound();
@@ -14,7 +17,7 @@ export default function InterceptedImagePage() {
 
   return (
     <>
-      <div className="modal-backdrop" onClick={router.back} />
+      <ModalBackdrop />
       <dialog open className="modal">
         <div className="fullscreen-image">
           <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} />

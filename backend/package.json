@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/app.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc",
     "start": "node dist/app.js",
-    "dev": "ts-node-dev --respawn app.ts"
+    "dev": "ts-node-dev --respawn --transpile-only --compiler-options \"{\\\"module\\\":\\\"CommonJS\\\"}\" app.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "better-sqlite3": "^9.4.3",
+    "better-sqlite3": "^11.10.0",
     "cors": "^2.8.5",
     "express": "^4.18.2"
   },
